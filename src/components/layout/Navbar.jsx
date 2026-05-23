@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Landmark, Menu, X, Sun, Moon } from 'lucide-react';
+import { Landmark, Menu, X } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 
 const navLinks = [
@@ -162,19 +162,6 @@ const Navbar = () => {
 
           {/* Right Side */}
           <div className="flex items-center gap-3">
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-navy-700 dark:text-navy-200 hover:bg-gray-100 dark:hover:bg-navy-800 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {isDark ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </button>
-
             {/* CTA Button */}
             <a
               href="/#query"
