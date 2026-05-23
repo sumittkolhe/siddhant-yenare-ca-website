@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 const WhatsAppButton = () => {
   const whatsappUrl =
-    'https://wa.me/918237278148?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20CA%20services.';
+    'https://wa.me/918262883408?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20CA%20services.';
 
   return (
     <motion.a

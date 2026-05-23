@@ -121,7 +121,7 @@ I have sent you a message from the Contact section of your website. Here are my 
 
 Please get back to me. Thank you!`;
 
-      const whatsappUrl = `https://wa.me/918237278148?text=${encodeURIComponent(whatsappText)}`;
+      const whatsappUrl = `https://wa.me/918262883408?text=${encodeURIComponent(whatsappText)}`;
 
       toast.success('Message recorded! Redirecting you to WhatsApp to message CA Siddhant directly...', {
         duration: 4000,

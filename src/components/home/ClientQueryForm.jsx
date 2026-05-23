@@ -123,7 +123,7 @@ I have just submitted a new inquiry booking on your website. Here are my details
 
 Please review my submission at your convenience. Thank you!`;
 
-      const whatsappUrl = `https://wa.me/918237278148?text=${encodeURIComponent(whatsappText)}`;
+      const whatsappUrl = `https://wa.me/918262883408?text=${encodeURIComponent(whatsappText)}`;
 
       toast.success(
         'Inquiry recorded! Redirecting you to WhatsApp to directly message CA Siddhant...',
