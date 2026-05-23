@@ -4,13 +4,13 @@ import { Landmark, Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
+  { label: 'Home', href: '/#home' },
+  { label: 'About', href: '/#about' },
+  { label: 'Services', href: '/#services' },
   { label: 'AI Tax Assistant', href: '#ai-tax-assistant', isAI: true },
-  { label: 'Resources', href: '#faq' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Resources', href: '/#faq' },
+  { label: 'Blog', href: '/#blog' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 const Navbar = () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
   useEffect(() => {
     const sectionIds = navLinks
       .filter((link) => !link.isAI)
-      .map((link) => link.href.replace('#', ''));
+      .map((link) => link.href.replace('/#', '').replace('#', ''));
     const observers = [];
 
     sectionIds.forEach((id) => {
@@ -71,29 +71,17 @@ const Navbar = () => {
 
   const handleNavClick = useCallback(
     (e, item) => {
-      e.preventDefault();
       const isString = typeof item === 'string';
-      const href = isString ? item : item.href;
       const isAI = !isString && item.isAI;
 
       if (isAI) {
+        e.preventDefault();
         window.dispatchEvent(new CustomEvent('open-ai-chat'));
         setMobileMenuOpen(false);
         return;
       }
 
-      const targetId = href.replace('#', '');
-      const target = document.getElementById(targetId);
-      if (target) {
-        const headerOffset = 80; // height of sticky navbar
-        const elementPosition = target.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        });
-      }
+      // Let the browser handle standard smooth hash scrolling natively
       setMobileMenuOpen(false);
     },
     []
@@ -126,8 +114,8 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* Logo */}
           <a
-            href="#home"
-            onClick={(e) => handleNavClick(e, '#home')}
+            href="/#home"
+            onClick={(e) => handleNavClick(e, '/#home')}
             className="flex items-center gap-3 group"
           >
             <div className="w-10 h-10 bg-gradient-to-br from-gold-400 to-gold-600 rounded-xl flex items-center justify-center shadow-gold/20 shadow-lg group-hover:shadow-gold/40 transition-shadow">
@@ -146,7 +134,7 @@ const Navbar = () => {
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => {
-              const sectionId = link.href.replace('#', '');
+              const sectionId = link.href.replace('/#', '').replace('#', '');
               const isActive = activeSection === sectionId;
               return (
                 <a
@@ -189,8 +177,8 @@ const Navbar = () => {
 
             {/* CTA Button */}
             <a
-              href="#query"
-              onClick={(e) => handleNavClick(e, '#query')}
+              href="/#query"
+              onClick={(e) => handleNavClick(e, '/#query')}
               className="hidden lg:block bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-bold text-sm px-6 py-2.5 rounded-xl shadow-gold/15 shadow-md hover:shadow-gold/30 hover:-translate-y-0.5 border border-gold-400 hover:border-gold-300 transition-all duration-300 cursor-pointer"
             >
               Book Consultation
@@ -238,7 +226,7 @@ const Navbar = () => {
           >
             <div className="p-6 space-y-2">
               {navLinks.map((link) => {
-                const sectionId = link.href.replace('#', '');
+                const sectionId = link.href.replace('/#', '').replace('#', '');
                 const isActive = activeSection === sectionId;
                 return (
                   <motion.a
@@ -258,8 +246,8 @@ const Navbar = () => {
               })}
               <motion.div variants={mobileLinkVariants} className="pt-4">
                 <a
-                  href="#query"
-                  onClick={(e) => handleNavClick(e, '#query')}
+                  href="/#query"
+                  onClick={(e) => handleNavClick(e, '/#query')}
                   className="block text-center bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-bold text-base px-5 py-3.5 rounded-xl hover:shadow-lg hover:shadow-gold-500/25 border border-gold-400 transition-all cursor-pointer"
                 >
                   Book Consultation

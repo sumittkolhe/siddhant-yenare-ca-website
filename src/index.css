@@ -218,3 +218,8 @@ select:-webkit-autofill:focus {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* ===== Sticky Header Scroll Offset ===== */
+section[id] {
+  scroll-margin-top: 80px;
+}
