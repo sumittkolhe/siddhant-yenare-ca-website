@@ -1,0 +1,38 @@
+export const blogPosts = [
+  {
+    id: 1,
+    category: 'Tax Planning',
+    title: 'Top 10 Tax Saving Strategies for Salaried Individuals in 2025',
+    excerpt: 'Discover proven strategies to minimize your tax liability legally. From Section 80C to NPS contributions, learn how to maximize your savings.',
+    date: '2025-01-15',
+    readTime: '5 min read',
+    slug: 'tax-saving-strategies-2025',
+  },
+  {
+    id: 2,
+    category: 'GST Updates',
+    title: 'GST Annual Return: Everything You Need to Know About GSTR-9',
+    excerpt: 'A comprehensive guide to filing GSTR-9 annual return. Understand the requirements, due dates, and common mistakes to avoid.',
+    date: '2025-02-08',
+    readTime: '7 min read',
+    slug: 'gstr-9-annual-return-guide',
+  },
+  {
+    id: 3,
+    category: 'Financial Planning',
+    title: 'Why Every Startup Needs a Chartered Accountant from Day One',
+    excerpt: 'Starting a business? Learn why engaging a CA early can save you from costly compliance mistakes and help you make better financial decisions.',
+    date: '2025-03-12',
+    readTime: '4 min read',
+    slug: 'startup-ca-importance',
+  },
+  {
+    id: 4,
+    category: 'Compliance',
+    title: 'New TDS Rules 2025: What Businesses Must Know',
+    excerpt: 'Stay updated with the latest TDS provisions. This guide covers new rates, thresholds, and compliance requirements effective from April 2025.',
+    date: '2025-04-01',
+    readTime: '6 min read',
+    slug: 'tds-rules-2025',
+  },
+];

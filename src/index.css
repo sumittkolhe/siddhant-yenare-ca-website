@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+/* ===== CSS Custom Properties ===== */
+:root {
+  --navy-950: #0a1628;
+  --navy-900: #0f1d34;
+  --navy-800: #1a2744;
+  --navy-700: #243554;
+  --navy-600: #2e4565;
+  --navy-500: #3b577d;
+  --navy-400: #597090;
+  --navy-300: #7789a3;
+  --navy-200: #9eabbe;
+  --navy-100: #c5cdd9;
+  --navy-50: #e8ecf2;
+
+  --gold-600: #c5a05e;
+  --gold-500: #d4af37;
+  --gold-400: #e8c547;
+  --gold-300: #ebc06e;
+  --gold-200: #f2d6a4;
+  --gold-100: #f9ecd4;
+  --gold-50: #fdf8ee;
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-shadow: 0 8px 32px 0 rgba(10, 22, 40, 0.12);
+}
+
+.dark {
+  --glass-bg: rgba(15, 29, 52, 0.7);
+  --glass-border: rgba(36, 53, 84, 0.5);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #ffffff;
+  color: #1a2744;
+  line-height: 1.6;
+  overflow-x: hidden;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+.dark body {
+  background-color: var(--navy-950);
+  color: var(--navy-100);
+}
+
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+/* ===== Custom Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold-500), var(--gold-600));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--gold-400), var(--gold-500));
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--navy-900);
+}
+
+/* ===== Selection ===== */
+::selection {
+  background-color: var(--gold-500);
+  color: var(--navy-950);
+}
+
+/* ===== Typography ===== */
+.font-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-accent {
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+/* ===== Glass Morphism Utility ===== */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.dark .glass-strong {
+  background: rgba(15, 29, 52, 0.85);
+  border: 1px solid rgba(36, 53, 84, 0.5);
+}
+
+/* ===== Gold Text Gradient ===== */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Animations ===== */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(5deg); }
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s infinite;
+}
+
+/* ===== Smooth theme transitions ===== */
+/*
+  Apply transitions ONLY via the .dark class on <html>.
+  When ThemeContext toggles .dark on document.documentElement,
+  these transitions fire. They do NOT apply on initial page load.
+*/
+html.dark * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Interactive elements always benefit from snappy transitions */
+button, a, input, textarea, select {
+  transition: all 0.15s ease;
+}
+
+/* ===== Form autofill override ===== */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: inherit;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ===== Line Clamp ===== */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
