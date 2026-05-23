@@ -203,12 +203,13 @@ const QueryDetail = ({ query, onClose, onUpdateStatus }) => {
                     </label>
                     <a
                       href={query.fileUrl}
+                      download={query.fileName || 'attachment'}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 bg-navy-950/60 border border-navy-800 rounded-xl px-4 py-2.5 text-xs text-blue-400 hover:text-blue-300 hover:bg-navy-800/50 transition-all font-medium"
                     >
                       <ExternalLink className="w-4 h-4" />
-                      Download Attachment
+                      Download: {query.fileName || 'Attachment'}
                     </a>
                   </div>
                 )}

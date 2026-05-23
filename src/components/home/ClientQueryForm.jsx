@@ -113,9 +113,18 @@ export default function ClientQueryForm() {
 
       // Get secure download link to attached file if available
       const attachmentLink = result?.fileUrl;
-      const fileDetailText = selectedFile 
-        ? `\n• Attached File: ${selectedFile.name}${attachmentLink && attachmentLink !== 'mock-attachment-url' ? `\n• View Document: ${attachmentLink}` : '\n• Note: View attachment inside your Admin Dashboard queries list.'}`
-        : '\n• Attached Document: None';
+      // Real Firebase Storage URLs are short HTTPS links — include them directly in WhatsApp.
+      // Base64 data URLs (demo mock) are too large for WhatsApp text, so point to admin dashboard.
+      const isRealUrl = attachmentLink && attachmentLink.startsWith('https://');
+      let fileDetailText = '';
+      if (selectedFile) {
+        fileDetailText = `\n• Attached File: ${selectedFile.name}`;
+        if (isRealUrl) {
+          fileDetailText += `\n• View/Download Document: ${attachmentLink}`;
+        } else {
+          fileDetailText += `\n• Document Saved: View & download the attachment from the Admin Dashboard → ${window.location.origin}/admin`;
+        }
+      }
 
       // Construct a detailed professional WhatsApp text message
       const whatsappText = `Hello CA Siddhant Yenare,

@@ -48,12 +48,28 @@ const notifyMockListeners = () => {
 };
 
 // ─── Mock CRUD helpers ─────────────────────────────────────────────────────────
+
+// Convert a File object to a base64 data URL for local storage persistence
+const fileToDataUrl = (file) => {
+  return new Promise((resolve) => {
+    if (!file) return resolve(null);
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = () => resolve(null);
+    reader.readAsDataURL(file);
+  });
+};
+
 const mockAddQuery = async (queryData, file) => {
   await new Promise((r) => setTimeout(r, 800)); // simulate network
+
+  // Convert file to a real base64 data URL so downloads and links work
+  const fileDataUrl = await fileToDataUrl(file);
+
   const newQuery = {
     id: Date.now().toString(),
     ...queryData,
-    fileUrl: file ? 'mock-attachment-url' : null,
+    fileUrl: fileDataUrl,
     fileName: file ? file.name : null,
     status: 'pending',
     createdAt: new Date().toISOString(),
