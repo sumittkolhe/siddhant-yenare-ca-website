@@ -7,8 +7,9 @@ const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
-  { label: 'Why Us', href: '#why-us' },
-  { label: 'Testimonials', href: '#testimonials' },
+  { label: 'AI Tax Assistant', href: '#ai-tax-assistant', isAI: true },
+  { label: 'Resources', href: '#faq' },
+  { label: 'Blog', href: '#blog' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -29,7 +30,9 @@ const Navbar = () => {
 
   // Active section detection via IntersectionObserver
   useEffect(() => {
-    const sectionIds = navLinks.map((link) => link.href.replace('#', ''));
+    const sectionIds = navLinks
+      .filter((link) => !link.isAI)
+      .map((link) => link.href.replace('#', ''));
     const observers = [];
 
     sectionIds.forEach((id) => {
@@ -67,8 +70,18 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   const handleNavClick = useCallback(
-    (e, href) => {
+    (e, item) => {
       e.preventDefault();
+      const isString = typeof item === 'string';
+      const href = isString ? item : item.href;
+      const isAI = !isString && item.isAI;
+
+      if (isAI) {
+        window.dispatchEvent(new CustomEvent('open-ai-chat'));
+        setMobileMenuOpen(false);
+        return;
+      }
+
       const target = document.querySelector(href);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
@@ -131,7 +144,7 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
+                  onClick={(e) => handleNavClick(e, link)}
                   className={`relative text-sm font-medium transition-colors duration-300 ${
                     isActive
                       ? 'text-gold-500'
@@ -168,9 +181,9 @@ const Navbar = () => {
 
             {/* CTA Button */}
             <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, '#contact')}
-              className="hidden lg:block bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-semibold text-sm px-5 py-2.5 rounded-xl hover:shadow-lg hover:shadow-gold-500/25 transition-all duration-300 hover:-translate-y-0.5"
+              href="#query"
+              onClick={(e) => handleNavClick(e, '#query')}
+              className="hidden lg:block bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-bold text-sm px-6 py-2.5 rounded-xl shadow-gold/15 shadow-md hover:shadow-gold/30 hover:-translate-y-0.5 border border-gold-400 hover:border-gold-300 transition-all duration-300 cursor-pointer"
             >
               Book Consultation
             </a>
@@ -224,7 +237,7 @@ const Navbar = () => {
                     key={link.href}
                     href={link.href}
                     variants={mobileLinkVariants}
-                    onClick={(e) => handleNavClick(e, link.href)}
+                    onClick={(e) => handleNavClick(e, link)}
                     className={`block text-lg font-medium py-3 px-4 rounded-xl transition-all ${
                       isActive
                         ? 'text-gold-500 bg-gold-50 dark:bg-gold-500/10'
@@ -237,9 +250,9 @@ const Navbar = () => {
               })}
               <motion.div variants={mobileLinkVariants} className="pt-4">
                 <a
-                  href="#contact"
-                  onClick={(e) => handleNavClick(e, '#contact')}
-                  className="block text-center bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-semibold text-base px-5 py-3 rounded-xl hover:shadow-lg hover:shadow-gold-500/25 transition-all"
+                  href="#query"
+                  onClick={(e) => handleNavClick(e, '#query')}
+                  className="block text-center bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-bold text-base px-5 py-3.5 rounded-xl hover:shadow-lg hover:shadow-gold-500/25 border border-gold-400 transition-all cursor-pointer"
                 >
                   Book Consultation
                 </a>
