@@ -49,7 +49,9 @@ const notifyMockListeners = () => {
 
 // ─── Mock CRUD helpers ─────────────────────────────────────────────────────────
 
-// Convert a File object to a base64 data URL for local storage persistence
+import { uploadFileToCloud } from '../lib/fileUpload';
+
+// Convert a File object to a base64 data URL (fallback for local admin downloads)
 const fileToDataUrl = (file) => {
   return new Promise((resolve) => {
     if (!file) return resolve(null);
@@ -63,13 +65,23 @@ const fileToDataUrl = (file) => {
 const mockAddQuery = async (queryData, file) => {
   await new Promise((r) => setTimeout(r, 800)); // simulate network
 
-  // Convert file to a real base64 data URL so downloads and links work
-  const fileDataUrl = await fileToDataUrl(file);
+  let cloudUrl = null;
+  let fallbackDataUrl = null;
+
+  if (file) {
+    // Try cloud upload first for a real shareable HTTPS link
+    cloudUrl = await uploadFileToCloud(file);
+
+    // Also generate a base64 data URL as fallback for local admin downloads
+    if (!cloudUrl) {
+      fallbackDataUrl = await fileToDataUrl(file);
+    }
+  }
 
   const newQuery = {
     id: Date.now().toString(),
     ...queryData,
-    fileUrl: fileDataUrl,
+    fileUrl: cloudUrl || fallbackDataUrl,
     fileName: file ? file.name : null,
     status: 'pending',
     createdAt: new Date().toISOString(),
