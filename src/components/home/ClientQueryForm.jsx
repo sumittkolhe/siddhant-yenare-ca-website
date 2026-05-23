@@ -95,7 +95,7 @@ export default function ClientQueryForm() {
     try {
       const aiMeta = categorizeQuery(formData.message);
 
-      await addQuery({
+      const result = await addQuery({
         ...formData,
         aiCategory: aiMeta.category,
         aiUrgency: aiMeta.urgency,
@@ -111,6 +111,12 @@ export default function ClientQueryForm() {
         phone: formData.phone,
       });
 
+      // Get secure download link to attached file if available
+      const attachmentLink = result?.fileUrl;
+      const fileDetailText = selectedFile 
+        ? `\n• Attached File: ${selectedFile.name}${attachmentLink && attachmentLink !== 'mock-attachment-url' ? `\n• View Document: ${attachmentLink}` : '\n• Note: View attachment inside your Admin Dashboard queries list.'}`
+        : '\n• Attached Document: None';
+
       // Construct a detailed professional WhatsApp text message
       const whatsappText = `Hello CA Siddhant Yenare,
 
@@ -119,7 +125,7 @@ I have just submitted a new inquiry booking on your website. Here are my details
 • Email: ${formData.email}
 • Phone: ${formData.phone || 'N/A'}
 • Service Required: ${formData.service || 'N/A'}
-• Message: ${formData.message}
+• Message: ${formData.message}${fileDetailText}
 
 Please review my submission at your convenience. Thank you!`;
 

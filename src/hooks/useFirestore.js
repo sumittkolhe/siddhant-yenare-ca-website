@@ -63,7 +63,7 @@ const mockAddQuery = async (queryData, file) => {
   const current = getMockQueries();
   saveMockQueries([newQuery, ...current]);
   notifyMockListeners();
-  return newQuery.id;
+  return { id: newQuery.id, fileUrl: newQuery.fileUrl };
 };
 
 const mockSubscribe = (callback) => {
@@ -128,7 +128,7 @@ export function useFirestore() {
         }
 
         const docRef = await addDoc(collection(db, 'queries'), docData);
-        return docRef.id;
+        return { id: docRef.id, fileUrl: docData.fileUrl };
       } catch (error) {
         console.error('Error adding query, falling back to localStorage:', error);
         return await mockAddQuery(queryData, file);
