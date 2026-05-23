@@ -111,10 +111,29 @@ export default function ClientQueryForm() {
         phone: formData.phone,
       });
 
+      // Construct a detailed professional WhatsApp text message
+      const whatsappText = `Hello CA Siddhant Yenare,
+
+I have just submitted a new inquiry booking on your website. Here are my details:
+• Name: ${formData.fullName}
+• Email: ${formData.email}
+• Phone: ${formData.phone || 'N/A'}
+• Service Required: ${formData.service || 'N/A'}
+• Message: ${formData.message}
+
+Please review my submission at your convenience. Thank you!`;
+
+      const whatsappUrl = `https://wa.me/918237278148?text=${encodeURIComponent(whatsappText)}`;
+
       toast.success(
-        'Your query has been submitted successfully! We will get back to you within 24 hours.',
-        { duration: 5000, icon: '✅' }
+        'Inquiry recorded! Redirecting you to WhatsApp to directly message CA Siddhant...',
+        { duration: 4000, icon: '💬' }
       );
+
+      // Open WhatsApp in a new tab
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+      }, 1200);
 
       // Reset form
       setFormData({

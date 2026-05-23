@@ -109,10 +109,29 @@ export default function Contact() {
         source: 'contact-form',
       });
 
-      toast.success('Message sent successfully! We will respond within 24 hours.', {
-        duration: 5000,
-        icon: '✅',
+      // Construct a detailed professional WhatsApp text message
+      const whatsappText = `Hello CA Siddhant Yenare,
+
+I have sent you a message from the Contact section of your website. Here are my details:
+• Name: ${formData.fullName}
+• Email: ${formData.email}
+• Phone: ${formData.phone || 'N/A'}
+• Service Required: ${formData.service || 'N/A'}
+• Message: ${formData.message}
+
+Please get back to me. Thank you!`;
+
+      const whatsappUrl = `https://wa.me/918237278148?text=${encodeURIComponent(whatsappText)}`;
+
+      toast.success('Message recorded! Redirecting you to WhatsApp to message CA Siddhant directly...', {
+        duration: 4000,
+        icon: '💬',
       });
+
+      // Open WhatsApp in a new tab
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+      }, 1200);
 
       setFormData({
         fullName: '',
