@@ -10,6 +10,7 @@ import About from '../components/home/About';
 import Services from '../components/home/Services';
 import DocumentAnalyzer from '../components/home/DocumentAnalyzer';
 import WhyChooseUs from '../components/home/WhyChooseUs';
+import AITools from '../components/home/AITools';
 import ClientQueryForm from '../components/home/ClientQueryForm';
 import Testimonials from '../components/home/Testimonials';
 import FAQ from '../components/home/FAQ';
@@ -58,7 +59,7 @@ export default function HomePage() {
         setTimeout(() => {
           document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
         }, 150);
-      } else if (hash === '#services' || hash === '#document-analyzer') {
+      } else if (hash === '#services' || hash === '#document-analyzer' || hash === '#ai-desk') {
         setActiveTab('services');
         setTimeout(() => {
           document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
@@ -162,6 +163,7 @@ export default function HomePage() {
                       {/* Suite: Services & Automated Document Scan Vetting */}
                       <Services />
                       <DocumentAnalyzer />
+                      <AITools />
                     </div>
                   )}
 
