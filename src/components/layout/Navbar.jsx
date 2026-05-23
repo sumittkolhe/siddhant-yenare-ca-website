@@ -82,9 +82,17 @@ const Navbar = () => {
         return;
       }
 
-      const target = document.querySelector(href);
+      const targetId = href.replace('#', '');
+      const target = document.getElementById(targetId);
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+        const headerOffset = 80; // height of sticky navbar
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
       }
       setMobileMenuOpen(false);
     },
